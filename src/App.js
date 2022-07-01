@@ -6,11 +6,37 @@ import Characters from './components/Characters';
 function App() {
     document.title = "SPA example";
     const [characters, setCharacters] = useState(null);
+    const [pages, setPages] = useState(1);
+    const [pageNumber, setPageNumber] = useState(1);
+    const [isInvalid, setIsInvalid] = useState(false);
 
     const search = async () => {
-        const apiResponseObj = await fetch("https://rickandmortyapi.com/api/character");
-        const apiResponseJson = await apiResponseObj.json();
+        let apiResponseJson = await callAPi(pageNumber);
         setCharacters(apiResponseJson.results);
+    }
+
+    const getTotalPages = async () => {
+        let apiResponseJson = await callAPi();
+        setPages(apiResponseJson.info.pages);
+    }
+
+    const callAPi = async (page) => {
+        let url = `https://rickandmortyapi.com/api/character${page > 1 ? `?page=${page}` : ""}`; 
+        console.log(url);
+        const apiResponseObj = await fetch(url);
+        return await apiResponseObj.json();
+    }
+
+    const updatePageToRender = (evt) => {
+        let page = evt.target.value;
+        page = page === "" ? 1 : page;
+        if (page > 0 && page <= pages) {
+            setPageNumber(page);
+            setIsInvalid(false);
+            console.log(pageNumber);
+        } else {
+            setIsInvalid(true);
+        }
     }
 
     return (
@@ -21,7 +47,17 @@ function App() {
                     <>
                         <h1 className='title'>Rick & Morty</h1>
                         <img src={rickAndMortyImg} alt="Rick&Morty" className='img-home' />
-                        <button id="searchButton" onClick={search} className="btn-search">Search</button>
+                        <div id="pagesMessage">
+                            <button id="showTotalPages" onClick={getTotalPages} className="btn-page">Show total pages</button>
+                            <br></br>
+                            <span>There {pages === 1 ? "is" : "are"} <span className='highlighted'>{pages}</span> {pages === 1 ? "page" : 'pages'} available</span>
+                            <br></br>
+                            <span className='text-grey' display="false"> (by default it is going to render page 1)</span>
+                        </div>
+                        <br></br>
+                        <span id="errorPageRange" className={`text-red ${isInvalid ? '' : 'd-none'}`}> Page number should be between 1 and {pages}!</span>
+                        <input type="Number" id="pageQuery" onChange={updatePageToRender} placeholder="Introduce page" min="1" max={pages}></input>
+                        <button id="searchButton" onClick={search} className={`btn-search ${isInvalid ? 'd-none' : ''}`}>Search</button>
                     </>
                 }
             </header>

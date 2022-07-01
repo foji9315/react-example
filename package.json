@@ -15,7 +15,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "provision": "aws cloudformation deploy --template-file ./aws-template.yml --stack-name react-bucket --parameter-overrides BucketName=react-example-skt",
+    "upload": "aws s3 sync build/ s3://react-example-skt --delete",
+    "deploy": "npm run build && npm run provision && npm run upload",
+    "update": "npm run build && npm run upload",
+    "delete": "aws s3 rm s3://bucket-name --recursive && aws cloudformation delete-stack --stack-name react-bucket"
   },
   "eslintConfig": {
     "extends": [

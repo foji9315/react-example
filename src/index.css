@@ -149,7 +149,9 @@ body {
 .back-home {
   text-decoration: underline;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 25px;
+  font-weight: bold;
+  color: chocolate;
 }
 
 input{ 

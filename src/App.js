@@ -55,7 +55,7 @@ function App() {
                             <span className='text-grey' display="false"> (by default it is going to render page 1)</span>
                         </div>
                         <br></br>
-                        <span id="errorPageRange" className={`text-red ${isInvalid ? '' : 'd-none'}`}> Page number should be between 1 and {pages}!</span>
+                        <span id="errorPageRange" className={`text-red ${isInvalid ? '' : 'd-none'}`}> Page number should be {pages === 1 ? pages : `between 1 and ${pages}`}!</span>
                         <input type="Number" id="pageQuery" onChange={updatePageToRender} placeholder="Introduce page" min="1" max={pages}></input>
                         <button id="searchButton" onClick={search} className={`btn-search ${isInvalid ? 'd-none' : ''}`}>Search</button>
                     </>

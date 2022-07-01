@@ -42,7 +42,7 @@ function Characters(params) {
                     </div>
                 ))}
             </div>
-            <span id="backToHome2Button" className="back-home" onClick={backToHome} >Home</span>
+            <span id="backToHome2Button" className="back-home" onClick={backToHome}>Back to Home</span>
         </div>
     );
 }

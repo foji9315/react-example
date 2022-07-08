@@ -1,17 +1,16 @@
 function Characters(params) {
-    const { characters, setCharacters } = params;
+    let {characters} = params;
+    characters=[];
 
-    const backToHome = () => {
-        setCharacters(null);
-    }
+    
 
     console.log(characters);
     return (
         <div className="characters">
             <h1 className="title">Characters</h1>
-            <span id="backToHome1Button" className="back-home" onClick={backToHome}>Back to home</span>
+            <span id="backToHome1Button" className="back-home" >Back to home</span>
             <br></br>
-            <p>Showing from <span id="initValue" className="highlighted">{characters[0].id}</span> to <span id="endValue" className="highlighted">{characters[characters.length-1].id}</span></p>
+            <p>Showing from <span id="initValue" className="highlighted">{characters[0].id}</span> to <span id="endValue" className="highlighted">{characters[characters.length - 1].id}</span></p>
             <div className="container-characters">
                 {characters.map((element, index) => (
                     <div id={element.id} className="character-container" key={index}>
@@ -53,7 +52,7 @@ function Characters(params) {
                     </div>
                 ))}
             </div>
-            <span id="backToHome2Button" className="back-home" onClick={backToHome}>Back to Home</span>
+            <span id="backToHome2Button" className="back-home">Back to Home</span>
         </div>
     );
 }

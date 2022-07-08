@@ -1,7 +1,13 @@
-function CharacterDetails(params) {
-    const {character} = params; 
+import { useParams } from "react-router-dom";
 
-    return "";
+function CharacterDetails(params) {
+    const {id} = useParams();
+
+    return (
+        <div>
+            {id}
+        </div>
+    );
 
 }
 export default CharacterDetails;

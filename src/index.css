@@ -29,9 +29,7 @@ body {
   font-size: 18.005px;
   padding-left: 1.528em;
   padding-right: 1.528em;
-  padding-top: 0;
-  padding-bottom: 0;
-  min-height: 2.778em;
+  min-height: 1.5em;
   border: none;
   cursor: pointer;
   border-radius: 15px;

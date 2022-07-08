@@ -6,21 +6,22 @@ import Characters from './components/Characters';
 function App() {
     document.title = "SPA example";
     const [characters, setCharacters] = useState(null);
+    const [character, setCharacter] = useState(null);
     const [pages, setPages] = useState(1);
     const [pageNumber, setPageNumber] = useState(1);
     const [isInvalid, setIsInvalid] = useState(false);
 
     const search = async () => {
-        let apiResponseJson = await callAPi(pageNumber);
+        let apiResponseJson = await callAPiPage(pageNumber);
         setCharacters(apiResponseJson.results);
     }
 
     const getTotalPages = async () => {
-        let apiResponseJson = await callAPi();
+        let apiResponseJson = await callAPiPage();
         setPages(apiResponseJson.info.pages);
     }
 
-    const callAPi = async (page) => {
+    const callAPiPage = async (page) => {
         let url = `https://rickandmortyapi.com/api/character${page > 1 ? `?page=${page}` : ""}`; 
         console.log(url);
         const apiResponseObj = await fetch(url);
@@ -43,7 +44,7 @@ function App() {
         <div className="App">
             <header className="App-header">
                 {characters && characters.hasOwnProperty('length') ?
-                    <Characters characters={characters} setCharacters={setCharacters} /> :
+                    <Characters characters={characters} setCharacters={setCharacters} character={character} setCharacter={setCharacter} /> :
                     <>
                         <h1 className='title'>Rick & Morty</h1>
                         <img src={rickAndMortyImg} alt="Rick&Morty" className='img-home' />
